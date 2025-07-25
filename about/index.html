@@ -21,6 +21,49 @@
             --accent-color: #00c853;
             --background-light: #f5f5f5;
             --text-color: #333;
+            --animation-duration: 0.6s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes gradientFlow {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp var(--animation-duration) ease forwards;
+        }
+
+        .animate-scaleIn {
+            animation: scaleIn var(--animation-duration) ease forwards;
         }
 
         body {
@@ -103,11 +146,15 @@
 
         .hero {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            background-size: 200% 200%;
             padding: 4rem 2rem;
             text-align: center;
             color: white;
+            animation: gradientFlow 15s ease infinite;
         }
         .hero h1 {
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.3s;
             font-size: 2.5rem;
             margin-bottom: 1rem;
         }
@@ -209,26 +256,26 @@
 
     <div class="hero">
         <h1>WhyChain</h1>
-        <p class="hero-text-ja">AIとの対話で学びを深める、新しい学習プラットフォーム</p>
-        <p class="hero-text-en" style="display: none;">A new learning platform that deepens knowledge through dialogue with AI</p>
-        <p class="hero-text-ko" style="display: none;">AI와의 대화를 통해 학습을 깊이 있게 하는 새로운 학습 플랫폼</p>
+        <p class="hero-text-ja animate-fadeInUp" style="animation-delay: 0.5s;">AIとの対話で学びを深める、新しい学習プラットフォーム</p>
+        <p class="hero-text-en animate-fadeInUp" style="display: none; animation-delay: 0.5s;">A new learning platform that deepens knowledge through dialogue with AI</p>
+        <p class="hero-text-ko animate-fadeInUp" style="display: none; animation-delay: 0.5s;">AI와의 대화를 통해 학습을 깊이 있게 하는 새로운 학습 플랫폼</p>
     </div>
 
     <div class="container">
-        <div class="features">
-            <div class="feature-card">
+        <div class="features animate-fadeInUp" style="animation-delay: 0.7s;">
+            <div class="feature-card animate-scaleIn" style="animation-delay: 0.9s;">
                 <span class="material-icons feature-icon">school</span>
                 <h2>教えることで学ぶ</h2>
                 <p>他者に教えることで知識が定着するという学習方法を、AIとの対話で実現します。時間や場所を問わず、いつでも学習できます。</p>
             </div>
             
-            <div class="feature-card">
+            <div class="feature-card animate-scaleIn" style="animation-delay: 1.1s;">
                 <span class="material-icons feature-icon">psychology</span>
                 <h2>AIによるフィードバック</h2>
                 <p>説明の中の誤りや不正確な部分を即座に指摘。より正確な理解へと導きます。</p>
             </div>
             
-            <div class="feature-card">
+            <div class="feature-card animate-scaleIn" style="animation-delay: 1.3s;">
                 <span class="material-icons feature-icon">auto_stories</span>
                 <h2>幅広い学習分野</h2>
                 <p>プログラミング、一般教養、専門知識など、さまざまな分野での学習をサポートします。</p>

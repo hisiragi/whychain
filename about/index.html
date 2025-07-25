@@ -675,30 +675,30 @@ Last Updated: 2025-07-25
 
         // 多言語テキストデータ
         const translations = {
-            'ja': {
-                'nav': {
-                    'home': 'ホーム',
-                    'about': '概要',
-                    'contact': 'お問い合わせ',
-                    'start': '始める'
+            ja: {
+                nav: {
+                    home: 'ホーム',
+                    about: '概要',
+                    contact: 'お問い合わせ',
+                    start: '始める'
                 },
-                'features': {
-                    'teach': {
-                        'title': '教えることで学ぶ',
-                        'description': '他者に教えることで知識が定着するという学習方法を、AIとの対話で実現します。時間や場所を問わず、いつでも学習できます。'
+                features: {
+                    teach: {
+                        title: '教えることで学ぶ',
+                        description: '他者に教えることで知識が定着するという学習方法を、AIとの対話で実現します。時間や場所を問わず、いつでも学習できます。'
                     },
-                    'feedback': {
-                        'title': 'AIによるフィードバック',
-                        'description': '説明の中の誤りや不正確な部分を即座に指摘。より正確な理解へと導きます。'
+                    feedback: {
+                        title: 'AIによるフィードバック',
+                        description: '説明の中の誤りや不正確な部分を即座に指摘。より正確な理解へと導きます。'
                     },
-                    'fields': {
-                        'title': '幅広い学習分野',
-                        'description': 'プログラミング、一般教養、専門知識など、さまざまな分野での学習をサポートします。'
+                    fields: {
+                        title: '幅広い学習分野',
+                        description: 'プログラミング、一般教養、専門知識など、さまざまな分野での学習をサポートします。'
                     }
                 },
-                'about': {
-                    'title': 'WhyChainの特徴',
-                    'items': [
+                about: {
+                    title: 'WhyChainの特徴',
+                    items: [
                         '24時間365日いつでも利用可能',
                         '段階的な学習プロセス',
                         '理解度に応じた適切なフィードバック',
@@ -833,68 +833,64 @@ Last Updated: 2025-07-25
             }
         };
 
-        function updateUILanguage(lang) {
-            try {
-                const heroTexts = {
-                    ja: document.querySelector('.hero-text-ja'),
-                    en: document.querySelector('.hero-text-en'),
-                    ko: document.querySelector('.hero-text-ko')
-                };
+        function handleLanguageChange(lang) {
+            // ヒーローテキストの切り替え
+            const heroTexts = {
+                ja: document.querySelector('.hero-text-ja'),
+                en: document.querySelector('.hero-text-en'),
+                ko: document.querySelector('.hero-text-ko')
+            };
 
-                // Update hero text visibility
-                Object.entries(heroTexts).forEach(([key, element]) => {
-                    if (element) {
-                        element.style.display = key === lang ? 'block' : 'none';
+            Object.entries(heroTexts).forEach(([key, element]) => {
+                if (element) {
+                    element.style.display = key === lang ? 'block' : 'none';
+                }
+            });
+
+            const translation = translations[lang];
+            if (!translation) return;
+
+            // ナビゲーションの更新
+            document.querySelectorAll('.nav-link').forEach(link => {
+                const key = link.getAttribute('data-key');
+                if (key && translation.nav && translation.nav[key]) {
+                    link.textContent = translation.nav[key];
+                }
+            });
+
+            // 機能セクションの更新
+            if (translation.features) {
+                ['teach', 'feedback', 'fields'].forEach(featureKey => {
+                    const featureSection = document.querySelector(`[data-feature="${featureKey}"]`);
+                    if (featureSection && translation.features[featureKey]) {
+                        const feature = translation.features[featureKey];
+                        const titleEl = featureSection.querySelector('h2');
+                        const descEl = featureSection.querySelector('p');
+                        
+                        if (titleEl && feature.title) titleEl.textContent = feature.title;
+                        if (descEl && feature.description) descEl.textContent = feature.description;
                     }
                 });
+            }
 
-                const translation = translations[lang];
-                if (!translation) return;
+            // 概要セクションの更新
+            if (translation.about) {
+                const aboutSection = document.querySelector('.about-section');
+                if (aboutSection) {
+                    const titleEl = aboutSection.querySelector('h2');
+                    if (titleEl) titleEl.textContent = translation.about.title;
 
-                // Update navigation
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    const key = link.getAttribute('data-key');
-                    if (key && translation.nav && translation.nav[key]) {
-                        link.textContent = translation.nav[key];
-                    }
-                });
-
-                // Update features
-                if (translation.features) {
-                    ['teach', 'feedback', 'fields'].forEach(featureKey => {
-                        const featureSection = document.querySelector(`[data-feature="${featureKey}"]`);
-                        if (featureSection && translation.features[featureKey]) {
-                            const feature = translation.features[featureKey];
-                            const titleEl = featureSection.querySelector('h2');
-                            const descEl = featureSection.querySelector('p');
-                            
-                            if (titleEl && feature.title) titleEl.textContent = feature.title;
-                            if (descEl && feature.description) descEl.textContent = feature.description;
+                    const items = aboutSection.querySelectorAll('li span:not(.material-icons)');
+                    items.forEach((item, index) => {
+                        if (translation.about.items[index]) {
+                            item.textContent = translation.about.items[index];
                         }
                     });
                 }
-
-                // Update about section
-                if (translation.about) {
-                    const aboutSection = document.querySelector('.about-section');
-                    if (aboutSection) {
-                        const titleEl = aboutSection.querySelector('h2');
-                        if (titleEl) titleEl.textContent = translation.about.title;
-
-                        const items = aboutSection.querySelectorAll('li span:not(.material-icons)');
-                        items.forEach((item, index) => {
-                            if (translation.about.items[index]) {
-                                item.textContent = translation.about.items[index];
-                            }
-                        });
-                    }
-                }
-
-                // Update font and direction
-                setAppropriateFont(lang);
-            } catch (error) {
-                console.error('Error updating language:', error);
             }
+
+            // フォントと文字方向の更新
+            setAppropriateFont(lang);
         }
 
         async function detectUserLanguage() {
@@ -918,19 +914,27 @@ Last Updated: 2025-07-25
                 
                 const detectedLang = languageMap[country] || 'en';
                 
-                // 言語セレクターを更新
-                document.getElementById('language-select').value = lang;
-                setLanguage(lang);
+                // 言語セレクターを更新し、言語を設定
+                const languageSelect = document.getElementById('language-select');
+                if (languageSelect) {
+                    languageSelect.value = detectedLang;
+                    handleLanguageChange(detectedLang);
+                }
             } catch (error) {
                 console.error('Language detection failed:', error);
+                // エラー時はデフォルトで日本語を設定
+                handleLanguageChange('ja');
             }
         }
 
-        // シェア機能の初期化
-        initializeShareFeatures();
-        
-        // ページ読み込み時に言語を自動設定
-        detectUserLanguage();
+        document.addEventListener('DOMContentLoaded', function() {
+            // 言語切り替え機能の初期化
+            initializeLanguageHandling();
+            // シェア機能の初期化
+            initializeShareFeatures();
+            // 自動言語検出の実行
+            detectUserLanguage();
+        });
 
         function initializeShareFeatures() {
             const shareButton = document.querySelector('.share-button');

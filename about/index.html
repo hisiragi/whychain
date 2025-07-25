@@ -430,53 +430,203 @@ Last Updated: 2025-07-25
             </ul>
         </section>
 
-        <section class="statistics-section">
-            <h2>WhyChainの実績</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <span class="material-icons">people</span>
-                    <h3>100,000+</h3>
-                    <p>ユーザー</p>
+        <section class="ai-features-section">
+            <h2>AIとの対話学習</h2>
+            <div class="ai-features-grid">
+                <div class="ai-feature-card">
+                    <span class="material-icons">chat</span>
+                    <h3>ChatGPTを活用した対話型学習</h3>
+                    <p>最新のAI技術を活用し、まるで家庭教師のように対話しながら学べます。分からないところは何度でも質問でき、理解が深まるまでサポートします。</p>
                 </div>
-                <div class="stat-card">
-                    <span class="material-icons">school</span>
-                    <h3>50+</h3>
-                    <p>学習カテゴリー</p>
+                <div class="ai-feature-card">
+                    <span class="material-icons">psychology</span>
+                    <h3>個別最適化された学習プラン</h3>
+                    <p>AIがあなたの学習スタイルと理解度を分析し、最適な学習方法を提案。効率的な知識の定着をサポートします。</p>
                 </div>
-                <div class="stat-card">
-                    <span class="material-icons">public</span>
-                    <h3>190+</h3>
-                    <p>対応国</p>
+                <div class="ai-feature-card">
+                    <span class="material-icons">auto_awesome</span>
+                    <h3>インタラクティブな演習</h3>
+                    <p>理論だけでなく、実践的な演習を通じて学習。AIからのリアルタイムフィードバックで、より深い理解を促進します。</p>
                 </div>
-                <div class="stat-card">
-                    <span class="material-icons">stars</span>
-                    <h3>4.8/5.0</h3>
-                    <p>ユーザー評価</p>
-                </div>
+            </div>
+            <div class="language-support">
+                <h3>多言語サポート</h3>
+                <p>ユーザーの言語設定に応じて最適なフォントとレイアウトを自動適用。アラビア語やヒンディー語など、特殊なフォントが必要な言語にも対応しています。</p>
             </div>
         </section>
 
-        <section class="partners-section">
-            <h2>提携パートナー</h2>
-            <div class="partners-grid">
-                <div class="partner-card">
-                    <span class="material-icons">business</span>
-                    <h3>教育機関</h3>
-                    <p>世界中の大学や教育機関と提携</p>
-                </div>
-                <div class="partner-card">
-                    <span class="material-icons">corporate_fare</span>
-                    <h3>企業</h3>
-                    <p>グローバル企業との研修プログラム</p>
-                </div>
-                <div class="partner-card">
-                    <span class="material-icons">psychology_alt</span>
-                    <h3>研究機関</h3>
-                    <p>最新の学習理論と技術の研究開発</p>
-                </div>
-            </div>
-        </section>
+        <div class="floating-buttons">
+            <button class="share-button" onclick="shareContent()">
+                <span class="material-icons">share</span>
+            </button>
+            <button class="download-button" onclick="downloadPDF()">
+                <span class="material-icons">download</span>
+            </button>
+        </div>
     </div>
+
+    <style>
+        .ai-features-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border-radius: 8px;
+            color: white;
+        }
+
+        .ai-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .ai-feature-card {
+            text-align: left;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
+        }
+
+        .ai-feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .ai-feature-card .material-icons {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .ai-feature-card h3 {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .language-support {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .floating-buttons {
+            position: fixed;
+            right: 2rem;
+            bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .share-button, .download-button {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: none;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .share-button:hover, .download-button:hover {
+            transform: scale(1.1);
+            background: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .ai-features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .ai-feature-card {
+                padding: 1.5rem;
+            }
+
+            .floating-buttons {
+                right: 1rem;
+                bottom: 1rem;
+            }
+
+            .share-button, .download-button {
+                width: 48px;
+                height: 48px;
+            }
+        }
+    </style>
+
+    <script>
+        // シェア機能
+        async function shareContent() {
+            const shareData = {
+                title: 'WhyChain - AIと学ぶ新しい方法',
+                text: 'AIとの対話で学びを深める、新しい学習プラットフォーム',
+                url: window.location.href
+            };
+
+            try {
+                if (navigator.share) {
+                    await navigator.share(shareData);
+                } else {
+                    // フォールバック: URLをクリップボードにコピー
+                    await navigator.clipboard.writeText(window.location.href);
+                    alert('URLをクリップボードにコピーしました');
+                }
+            } catch (err) {
+                console.error('共有に失敗しました:', err);
+            }
+        }
+
+        // PDF機能
+        function downloadPDF() {
+            const link = document.createElement('a');
+            link.href = '/whychain-guide.pdf'; // PDFファイルへのパス
+            link.download = 'WhyChain_Guide.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // フォント自動設定
+        function setAppropriateFont(lang) {
+            const body = document.body;
+            switch (lang) {
+                case 'ar':
+                    body.style.fontFamily = "'Noto Sans Arabic', sans-serif";
+                    body.style.direction = 'rtl';
+                    break;
+                case 'hi':
+                    body.style.fontFamily = "'Noto Sans Devanagari', sans-serif";
+                    body.style.direction = 'ltr';
+                    break;
+                case 'zh':
+                    body.style.fontFamily = "'Noto Sans SC', sans-serif";
+                    body.style.direction = 'ltr';
+                    break;
+                case 'ko':
+                    body.style.fontFamily = "'Noto Sans KR', sans-serif";
+                    body.style.direction = 'ltr';
+                    break;
+                default:
+                    body.style.fontFamily = "'Noto Sans JP', sans-serif";
+                    body.style.direction = 'ltr';
+            }
+        }
+
+        // 言語変更時にフォントも自動設定
+        const originalSetLanguage = setLanguage;
+        setLanguage = function(lang) {
+            originalSetLanguage(lang);
+            setAppropriateFont(lang);
+        };
 
     <style>
         .statistics-section {

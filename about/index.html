@@ -111,12 +111,13 @@ Last Updated: 2025-07-25
 
         /* ナビゲーションスタイル */
         .nav {
-            background: #fff;
+            background: rgba(255, 255, 255, 0.95);
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            backdrop-filter: blur(5px);
         }
 
         .nav-container {
@@ -125,7 +126,7 @@ Last Updated: 2025-07-25
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
+            padding: 1.5rem 2rem;
         }
 
         .nav-logo {
@@ -208,16 +209,36 @@ Last Updated: 2025-07-25
         .hero {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             background-size: 200% 200%;
-            padding: 4rem 2rem;
+            padding: 8rem 2rem;
             text-align: center;
             color: white;
             animation: gradientFlow 15s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="white" fill-opacity="0.1"/></svg>') center/50% no-repeat;
+            opacity: 0.1;
         }
         .hero h1 {
             opacity: 0;
             animation: fadeInUp 1s ease forwards 0.3s;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
         .features {
             display: grid;
@@ -274,14 +295,39 @@ Last Updated: 2025-07-25
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: #fff;
-                padding: 1rem;
+                background: rgba(255, 255, 255, 0.98);
+                padding: 1.5rem;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                backdrop-filter: blur(5px);
             }
 
             .nav-menu.active {
                 display: flex;
                 flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .language-selector {
+                margin: 0;
+                width: 100%;
+            }
+
+            .language-selector select {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero {
+                padding: 6rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+                padding: 0 1rem;
             }
 
             .nav-toggle {
@@ -290,6 +336,15 @@ Last Updated: 2025-07-25
 
             .features {
                 grid-template-columns: 1fr;
+                padding: 2rem 1rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .about-section {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -374,7 +429,131 @@ Last Updated: 2025-07-25
                 </li>
             </ul>
         </section>
+
+        <section class="statistics-section">
+            <h2>WhyChainの実績</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="material-icons">people</span>
+                    <h3>100,000+</h3>
+                    <p>ユーザー</p>
+                </div>
+                <div class="stat-card">
+                    <span class="material-icons">school</span>
+                    <h3>50+</h3>
+                    <p>学習カテゴリー</p>
+                </div>
+                <div class="stat-card">
+                    <span class="material-icons">public</span>
+                    <h3>190+</h3>
+                    <p>対応国</p>
+                </div>
+                <div class="stat-card">
+                    <span class="material-icons">stars</span>
+                    <h3>4.8/5.0</h3>
+                    <p>ユーザー評価</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="partners-section">
+            <h2>提携パートナー</h2>
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <span class="material-icons">business</span>
+                    <h3>教育機関</h3>
+                    <p>世界中の大学や教育機関と提携</p>
+                </div>
+                <div class="partner-card">
+                    <span class="material-icons">corporate_fare</span>
+                    <h3>企業</h3>
+                    <p>グローバル企業との研修プログラム</p>
+                </div>
+                <div class="partner-card">
+                    <span class="material-icons">psychology_alt</span>
+                    <h3>研究機関</h3>
+                    <p>最新の学習理論と技術の研究開発</p>
+                </div>
+            </div>
+        </section>
     </div>
+
+    <style>
+        .statistics-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border-radius: 8px;
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+        }
+
+        .stat-card .material-icons {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card h3 {
+            font-size: 2.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .partners-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--background-light);
+            border-radius: 8px;
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .partner-card {
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .partner-card .material-icons {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid, .partners-grid {
+                grid-template-columns: 1fr;
+            }
+            .stat-card, .partner-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 
     <script>
         // 言語切り替え機能

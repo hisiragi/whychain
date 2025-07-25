@@ -655,22 +655,66 @@ Last Updated: 2025-07-25
         }
 
         function handleLanguageChange(lang) {
-            updateUILanguage(lang);
-            setAppropriateFont(lang);
-        }
-
-        function updateUILanguage(lang) {
             const translation = translations[lang];
             if (!translation) return;
 
-            // テキストの更新
-            updateTexts(translation);
+            // ヒーローテキストの更新
+            const heroTexts = {
+                ja: document.querySelector('.hero-text-ja'),
+                en: document.querySelector('.hero-text-en'),
+                ko: document.querySelector('.hero-text-ko')
+            };
+
+            Object.entries(heroTexts).forEach(([key, element]) => {
+                if (element) {
+                    element.style.display = key === lang ? 'block' : 'none';
+                    if (key === lang && translation.hero) {
+                        element.textContent = translation.hero[key];
+                    }
+                }
+            });
+
             // ナビゲーションの更新
-            updateNavigation(translation);
+            document.querySelectorAll('.nav-link').forEach(link => {
+                const key = link.getAttribute('data-key');
+                if (key && translation.nav && translation.nav[key]) {
+                    link.textContent = translation.nav[key];
+                }
+            });
+
             // 機能セクションの更新
-            updateFeatures(translation);
-            // その他のセクションの更新
-            updateOtherSections(translation);
+            if (translation.features) {
+                ['teach', 'feedback', 'fields'].forEach(featureKey => {
+                    const featureSection = document.querySelector(`[data-feature="${featureKey}"]`);
+                    if (featureSection && translation.features[featureKey]) {
+                        const feature = translation.features[featureKey];
+                        const titleEl = featureSection.querySelector('h2');
+                        const descEl = featureSection.querySelector('p');
+                        
+                        if (titleEl && feature.title) titleEl.textContent = feature.title;
+                        if (descEl && feature.description) descEl.textContent = feature.description;
+                    }
+                });
+            }
+
+            // 概要セクションの更新
+            if (translation.about) {
+                const aboutSection = document.querySelector('.about-section');
+                if (aboutSection) {
+                    const titleEl = aboutSection.querySelector('h2');
+                    if (titleEl) titleEl.textContent = translation.about.title;
+
+                    const items = aboutSection.querySelectorAll('li span:not(.material-icons)');
+                    items.forEach((item, index) => {
+                        if (translation.about.items[index]) {
+                            item.textContent = translation.about.items[index];
+                        }
+                    });
+                }
+            }
+
+            // フォントと文字方向の更新
+            setAppropriateFont(lang);
         }
 
         // 多言語テキストデータ
@@ -739,65 +783,10 @@ Last Updated: 2025-07-25
                     ]
                 }
             },
-            updateTexts: function(translation) {
-                const heroTexts = {
-                    ja: document.querySelector('.hero-text-ja'),
-                    en: document.querySelector('.hero-text-en'),
-                    ko: document.querySelector('.hero-text-ko')
-                };
-
-                Object.keys(heroTexts).forEach(key => {
-                    if (heroTexts[key]) {
-                        heroTexts[key].style.display = key === lang ? 'block' : 'none';
-                    }
-                });
-            },
-
-            updateNavigation: function(translation) {
-                if (translation.nav) {
-                    document.querySelectorAll('.nav-link').forEach(link => {
-                        const key = link.getAttribute('data-key');
-                        if (key && translation.nav[key]) {
-                            link.textContent = translation.nav[key];
-                        }
-                    });
-                }
-            },
-
-            updateFeatures: function(translation) {
-                if (translation.features) {
-                    ['teach', 'feedback', 'fields'].forEach(featureKey => {
-                        const feature = translation.features[featureKey];
-                        if (feature) {
-                            const section = document.querySelector(`[data-feature="${featureKey}"]`);
-                            if (section) {
-                                const titleEl = section.querySelector('h2');
-                                const descEl = section.querySelector('p');
-                                if (titleEl && feature.title) titleEl.textContent = feature.title;
-                                if (descEl && feature.description) descEl.textContent = feature.description;
-                            }
-                        }
-                    });
-                }
-            },
-
-            updateOtherSections: function(translation) {
-                if (translation.about) {
-                    const aboutSection = document.querySelector('.about-section');
-                    if (aboutSection) {
-                        const titleEl = aboutSection.querySelector('h2');
-                        if (titleEl) titleEl.textContent = translation.about.title;
-
-                        if (translation.about.items) {
-                            const items = aboutSection.querySelectorAll('li span:not(.material-icons)');
-                            items.forEach((item, index) => {
-                                if (translation.about.items[index]) {
-                                    item.textContent = translation.about.items[index];
-                                }
-                            });
-                        }
-                    }
-                }
+            'hero': {
+                'ja': 'AIとの対話で学びを深める、新しい学習プラットフォーム',
+                'en': 'A new learning platform that deepens knowledge through dialogue with AI',
+                'ko': 'AI와의 대화를 통해 학습을 깊이 있게 하는 새로운 학습 플랫폼'
             },
             ko: {
                 nav: {

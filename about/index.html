@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="icon" href="/images/logo.png">
     <style>
         body {
@@ -30,6 +31,7 @@
             background-color: #f5f5f5;
             padding: 4rem 2rem;
             text-align: center;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
         }
         .hero h1 {
             font-size: 2.5rem;
@@ -45,7 +47,42 @@
             background: #fff;
             padding: 2rem;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            color: #4a90e2;
+            margin-bottom: 1rem;
+        }
+
+        .about-section {
+            padding: 2rem;
+            background: #f9f9f9;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .about-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .about-section li {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .about-section .material-icons {
+            color: #4a90e2;
         }
     </style>
 </head>
@@ -58,16 +95,19 @@
     <div class="container">
         <div class="features">
             <div class="feature-card">
+                <span class="material-icons feature-icon">school</span>
                 <h2>教えることで学ぶ</h2>
                 <p>他者に教えることで知識が定着するという学習方法を、AIとの対話で実現します。時間や場所を問わず、いつでも学習できます。</p>
             </div>
             
             <div class="feature-card">
+                <span class="material-icons feature-icon">psychology</span>
                 <h2>AIによるフィードバック</h2>
                 <p>説明の中の誤りや不正確な部分を即座に指摘。より正確な理解へと導きます。</p>
             </div>
             
             <div class="feature-card">
+                <span class="material-icons feature-icon">auto_stories</span>
                 <h2>幅広い学習分野</h2>
                 <p>プログラミング、一般教養、専門知識など、さまざまな分野での学習をサポートします。</p>
             </div>
@@ -76,11 +116,26 @@
         <section class="about-section">
             <h2>WhyChainの特徴</h2>
             <ul>
-                <li>24時間365日いつでも利用可能</li>
-                <li>段階的な学習プロセス</li>
-                <li>理解度に応じた適切なフィードバック</li>
-                <li>学習履歴の可視化</li>
-                <li>継続的な知識のアップデート</li>
+                <li>
+                    <span class="material-icons">schedule</span>
+                    24時間365日いつでも利用可能
+                </li>
+                <li>
+                    <span class="material-icons">trending_up</span>
+                    段階的な学習プロセス
+                </li>
+                <li>
+                    <span class="material-icons">analytics</span>
+                    理解度に応じた適切なフィードバック
+                </li>
+                <li>
+                    <span class="material-icons">insights</span>
+                    学習履歴の可視化
+                </li>
+                <li>
+                    <span class="material-icons">update</span>
+                    継続的な知識のアップデート
+                </li>
             </ul>
         </section>
     </div>

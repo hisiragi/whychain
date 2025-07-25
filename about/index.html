@@ -239,10 +239,10 @@
             <a href="/" class="nav-logo">WhyChain</a>
             <button class="nav-toggle material-icons">menu</button>
             <div class="nav-menu">
-                <a href="/" class="nav-link">ホーム</a>
-                <a href="/about" class="nav-link">概要</a>
-                <a href="/contact" class="nav-link">お問い合わせ</a>
-                <a href="/start" class="nav-link">始める</a>
+                <a href="/" class="nav-link" data-key="home">ホーム</a>
+                <a href="/about" class="nav-link" data-key="about">概要</a>
+                <a href="/contact" class="nav-link" data-key="contact">お問い合わせ</a>
+                <a href="/start" class="nav-link" data-key="start">始める</a>
                 <div class="language-selector">
                     <select id="language-select">
                         <option value="ja">日本語</option>
@@ -263,19 +263,19 @@
 
     <div class="container">
         <div class="features animate-fadeInUp" style="animation-delay: 0.7s;">
-            <div class="feature-card animate-scaleIn" style="animation-delay: 0.9s;">
+            <div class="feature-card animate-scaleIn" style="animation-delay: 0.9s;" data-feature="teach">
                 <span class="material-icons feature-icon">school</span>
                 <h2>教えることで学ぶ</h2>
                 <p>他者に教えることで知識が定着するという学習方法を、AIとの対話で実現します。時間や場所を問わず、いつでも学習できます。</p>
             </div>
             
-            <div class="feature-card animate-scaleIn" style="animation-delay: 1.1s;">
+            <div class="feature-card animate-scaleIn" style="animation-delay: 1.1s;" data-feature="feedback">
                 <span class="material-icons feature-icon">psychology</span>
                 <h2>AIによるフィードバック</h2>
                 <p>説明の中の誤りや不正確な部分を即座に指摘。より正確な理解へと導きます。</p>
             </div>
             
-            <div class="feature-card animate-scaleIn" style="animation-delay: 1.3s;">
+            <div class="feature-card animate-scaleIn" style="animation-delay: 1.3s;" data-feature="fields">
                 <span class="material-icons feature-icon">auto_stories</span>
                 <h2>幅広い学習分野</h2>
                 <p>プログラミング、一般教養、専門知識など、さまざまな分野での学習をサポートします。</p>
@@ -287,23 +287,23 @@
             <ul>
                 <li>
                     <span class="material-icons">schedule</span>
-                    24時間365日いつでも利用可能
+                    <span>24時間365日いつでも利用可能</span>
                 </li>
                 <li>
                     <span class="material-icons">trending_up</span>
-                    段階的な学習プロセス
+                    <span>段階的な学習プロセス</span>
                 </li>
                 <li>
                     <span class="material-icons">analytics</span>
-                    理解度に応じた適切なフィードバック
+                    <span>理解度に応じた適切なフィードバック</span>
                 </li>
                 <li>
                     <span class="material-icons">insights</span>
-                    学習履歴の可視化
+                    <span>学習履歴の可視化</span>
                 </li>
                 <li>
                     <span class="material-icons">update</span>
-                    継続的な知識のアップデート
+                    <span>継続的な知識のアップデート</span>
                 </li>
             </ul>
         </section>
@@ -316,11 +316,135 @@
             setLanguage(lang);
         });
 
+        // 多言語テキストデータ
+        const translations = {
+            ja: {
+                nav: {
+                    home: 'ホーム',
+                    about: '概要',
+                    contact: 'お問い合わせ',
+                    start: '始める'
+                },
+                features: {
+                    teach: {
+                        title: '教えることで学ぶ',
+                        description: '他者に教えることで知識が定着するという学習方法を、AIとの対話で実現します。時間や場所を問わず、いつでも学習できます。'
+                    },
+                    feedback: {
+                        title: 'AIによるフィードバック',
+                        description: '説明の中の誤りや不正確な部分を即座に指摘。より正確な理解へと導きます。'
+                    },
+                    fields: {
+                        title: '幅広い学習分野',
+                        description: 'プログラミング、一般教養、専門知識など、さまざまな分野での学習をサポートします。'
+                    }
+                },
+                about: {
+                    title: 'WhyChainの特徴',
+                    items: [
+                        '24時間365日いつでも利用可能',
+                        '段階的な学習プロセス',
+                        '理解度に応じた適切なフィードバック',
+                        '学習履歴の可視化',
+                        '継続的な知識のアップデート'
+                    ]
+                }
+            },
+            en: {
+                nav: {
+                    home: 'Home',
+                    about: 'About',
+                    contact: 'Contact',
+                    start: 'Get Started'
+                },
+                features: {
+                    teach: {
+                        title: 'Learn by Teaching',
+                        description: 'Experience the proven method of learning through teaching, now with AI dialogue. Learn anytime, anywhere.'
+                    },
+                    feedback: {
+                        title: 'AI Feedback',
+                        description: 'Instant identification of errors and inaccuracies in explanations, guiding you to more precise understanding.'
+                    },
+                    fields: {
+                        title: 'Wide Range of Fields',
+                        description: 'Support for various fields including programming, general education, and specialized knowledge.'
+                    }
+                },
+                about: {
+                    title: 'WhyChain Features',
+                    items: [
+                        'Available 24/7',
+                        'Step-by-step Learning Process',
+                        'Adaptive Feedback Based on Understanding',
+                        'Learning Progress Visualization',
+                        'Continuous Knowledge Updates'
+                    ]
+                }
+            },
+            ko: {
+                nav: {
+                    home: '홈',
+                    about: '소개',
+                    contact: '문의하기',
+                    start: '시작하기'
+                },
+                features: {
+                    teach: {
+                        title: '가르치며 배우기',
+                        description: 'AI와의 대화를 통해 다른 사람에게 가르치면서 배우는 학습 방법을 실현합니다. 시간과 장소에 구애받지 않고 언제든지 학습할 수 있습니다.'
+                    },
+                    feedback: {
+                        title: 'AI 피드백',
+                        description: '설명 중의 오류와 부정확한 부분을 즉시 지적하여 더 정확한 이해로 이끕니다.'
+                    },
+                    fields: {
+                        title: '폭넓은 학습 분야',
+                        description: '프로그래밍, 교양, 전문 지식 등 다양한 분야의 학습을 지원합니다.'
+                    }
+                },
+                about: {
+                    title: 'WhyChain 특징',
+                    items: [
+                        '24시간 365일 언제든 이용 가능',
+                        '단계적 학습 프로세스',
+                        '이해도에 따른 적절한 피드백',
+                        '학습 이력 시각화',
+                        '지속적인 지식 업데이트'
+                    ]
+                }
+            }
+        };
+
         function setLanguage(lang) {
             // ヒーローテキストの切り替え
             document.querySelector('.hero-text-ja').style.display = lang === 'ja' ? 'block' : 'none';
             document.querySelector('.hero-text-en').style.display = lang === 'en' ? 'block' : 'none';
             document.querySelector('.hero-text-ko').style.display = lang === 'ko' ? 'block' : 'none';
+
+            const t = translations[lang];
+
+            // ナビゲーションの更新
+            document.querySelectorAll('.nav-link').forEach(link => {
+                const key = link.getAttribute('data-key');
+                if (key) link.textContent = t.nav[key];
+            });
+
+            // 機能カードの更新
+            const features = t.features;
+            document.querySelector('[data-feature="teach"] h2').textContent = features.teach.title;
+            document.querySelector('[data-feature="teach"] p').textContent = features.teach.description;
+            document.querySelector('[data-feature="feedback"] h2').textContent = features.feedback.title;
+            document.querySelector('[data-feature="feedback"] p').textContent = features.feedback.description;
+            document.querySelector('[data-feature="fields"] h2').textContent = features.fields.title;
+            document.querySelector('[data-feature="fields"] p').textContent = features.fields.description;
+
+            // 特徴セクションの更新
+            document.querySelector('.about-section h2').textContent = t.about.title;
+            const aboutItems = document.querySelectorAll('.about-section li span:not(.material-icons)');
+            aboutItems.forEach((item, index) => {
+                item.textContent = t.about.items[index];
+            });
         }
 
         // IPアドレスによる自動言語設定

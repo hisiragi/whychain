@@ -1,16 +1,88 @@
 <!DOCTYPE html>
-<html lang="ja"></html>
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>WhyChain-About</title>
-    <meta name=""WhyChain-About"" content="プログラミング・教養・勉強知識をAIで逆学習。間違いがあったら指摘してくれて知識を直してくれるAI学習サイト">
-    <meta og:title=""WhyChain-About">
+    <title>WhyChain - 教えて学ぶAI学習プラットフォーム</title>
+    <meta name="description" content="WhyChainは、AIとの対話を通じて知識を深める新しい学習プラットフォーム。プログラミング、教養、学習知識をAIに教えることで効果的に身につけることができます。">
+    <meta property="og:title" content="WhyChain - 教えて学ぶAI学習プラットフォーム">
+    <meta property="og:description" content="AIとの対話を通じて知識を深める新しい学習プラットフォーム">
+    <meta property="og:image" content="/images/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
-    <link href="logo.png">
-    <favicon rel="icon" href="logo.png"></favicon>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/images/logo.png">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .hero {
+            background-color: #f5f5f5;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+        }
+        .feature-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
 <body>
-    <p class="fontsize">WhyChainは、プログラミング・教養・勉強知識をAIで逆学習するサイトです。</p>
-    <p class="fontsize">ChatGPTを用いて「教えることで復習して身に付く」を何時でも出来ます<br> </p>
+    <div class="hero">
+        <h1>WhyChain</h1>
+        <p>AIとの対話で学びを深める、新しい学習プラットフォーム</p>
+    </div>
+
+    <div class="container">
+        <div class="features">
+            <div class="feature-card">
+                <h2>教えることで学ぶ</h2>
+                <p>他者に教えることで知識が定着するという学習方法を、AIとの対話で実現します。時間や場所を問わず、いつでも学習できます。</p>
+            </div>
+            
+            <div class="feature-card">
+                <h2>AIによるフィードバック</h2>
+                <p>説明の中の誤りや不正確な部分を即座に指摘。より正確な理解へと導きます。</p>
+            </div>
+            
+            <div class="feature-card">
+                <h2>幅広い学習分野</h2>
+                <p>プログラミング、一般教養、専門知識など、さまざまな分野での学習をサポートします。</p>
+            </div>
+        </div>
+
+        <section class="about-section">
+            <h2>WhyChainの特徴</h2>
+            <ul>
+                <li>24時間365日いつでも利用可能</li>
+                <li>段階的な学習プロセス</li>
+                <li>理解度に応じた適切なフィードバック</li>
+                <li>学習履歴の可視化</li>
+                <li>継続的な知識のアップデート</li>
+            </ul>
+        </section>
+    </div>
+</body>
+</html>

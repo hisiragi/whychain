@@ -29,6 +29,28 @@
             flex-direction: column;
         }
 
+        .fade-out {
+            animation: fadeOut 0.5s forwards;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s forwards;
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-20px); display: none; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
         .nav {
             position: fixed;
             top: 0;
@@ -212,7 +234,7 @@
             </div>
         </div>
 
-        <div class="chat-container">
+        <div class="chat-container" style="opacity: 0;">
             <div class="chat-messages" id="chat-messages"></div>
             <div class="input-container">
                 <textarea class="input-field" id="user-input" rows="3" placeholder="教えたいことを入力してください" data-translate="input-placeholder"></textarea>
@@ -279,25 +301,21 @@
         }
 
         // チャットの初期化と状態管理
-        let chatMessages = JSON.parse(localStorage.getItem('chatMessages') || '[]');
+        let chatMessages = [];
         const messagesContainer = document.getElementById('chat-messages');
         const userInput = document.getElementById('user-input');
         const sendButton = document.getElementById('send-button');
+        const initialPrompt = document.querySelector('.initial-prompt');
+        const topicSelection = document.querySelector('.topic-selection');
 
-        // 保存されたメッセージを表示
-        chatMessages.forEach(msg => {
-            addMessage(msg.content, msg.role === "user");
-        });
+        // Repository SecretsからAPIキーを取得（本番環境用）
+        const OPENAI_API_KEY = 'APIKEY'; // Repository Secretsから取得したAPIキーに置き換えられます
 
         // OpenAI APIの設定
         async function sendMessage(message) {
             try {
-                const apiKey = localStorage.getItem('openai_api_key');
-                if (!apiKey) {
-                    // APIキーが設定されていない場合は設定画面を表示
-                    showApiKeyPrompt();
-                    return;
-                }
+                // Repository SecretsのAPIキーを使用
+                const apiKey = OPENAI_API_KEY;
 
                 // 送信ボタンを無効化
                 sendButton.disabled = true;
@@ -479,6 +497,17 @@
             const message = userInput.value.trim();
             if (!message) return;
 
+            // 初回メッセージ時の処理
+            if (chatMessages.length === 0) {
+                initialPrompt.classList.add('fade-out');
+                topicSelection.classList.add('fade-out');
+                setTimeout(() => {
+                    initialPrompt.classList.add('hidden');
+                    topicSelection.classList.add('hidden');
+                    document.querySelector('.chat-container').classList.add('fade-in');
+                }, 500);
+            }
+
             userInput.value = '';
             addMessage(message, true);
 
@@ -490,10 +519,18 @@
 
         // イベントリスナーを非同期処理に対応させる
         sendButton.addEventListener('click', () => handleSend());
-        userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
+        userInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey && !e.altKey) {
                 e.preventDefault();
                 handleSend();
+            } else if ((e.key === 'Enter' && e.altKey) || (e.key === 'Enter' && e.shiftKey)) {
+                // Alt+Enter または Shift+Enter で改行
+                const start = userInput.selectionStart;
+                const end = userInput.selectionEnd;
+                const value = userInput.value;
+                userInput.value = value.substring(0, start) + "\n" + value.substring(end);
+                userInput.selectionStart = userInput.selectionEnd = start + 1;
+                e.preventDefault();
             }
         });
 

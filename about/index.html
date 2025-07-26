@@ -213,6 +213,12 @@
                 'feature2-desc': '説明の中の誤りや不正確な部分を即座に指摘。より正確な理解へと導きます。',
                 'feature3-title': '幅広い学習分野',
                 'feature3-desc': 'プログラミング、一般教養、専門知識など、さまざまな分野での学習をサポート。',
+                'features-title': 'WhyChainの特徴',
+                'feature-24-7': '24時間365日いつでも利用可能',
+                'feature-step-by-step': '段階的な学習プロセス',
+                'feature-feedback': '理解度に応じた適切なフィードバック',
+                'feature-visualization': '学習履歴の可視化',
+                'feature-updates': '継続的な知識のアップデート',
                 'start-button': '今すぐ始める'
             },
             en: {
@@ -225,6 +231,12 @@
                 'feature2-desc': 'Get immediate feedback on errors and inaccuracies in your explanations, guiding you to better understanding.',
                 'feature3-title': 'Wide Range of Topics',
                 'feature3-desc': 'Support for various fields including programming, general education, and specialized knowledge.',
+                'features-title': 'WhyChain Features',
+                'feature-24-7': 'Available 24/7',
+                'feature-step-by-step': 'Step-by-step Learning Process',
+                'feature-feedback': 'Adaptive Feedback Based on Understanding',
+                'feature-visualization': 'Learning Progress Visualization',
+                'feature-updates': 'Continuous Knowledge Updates',
                 'start-button': 'Get Started'
             },
             ko: {
@@ -237,6 +249,12 @@
                 'feature2-desc': '설명 중의 오류와 부정확한 부분을 즉시 지적하여 더 정확한 이해로 이끕니다.',
                 'feature3-title': '폭넓은 학습 분야',
                 'feature3-desc': '프로그래밍, 교양, 전문 지식 등 다양한 분야의 학습을 지원합니다.',
+                'features-title': 'WhyChain 특징',
+                'feature-24-7': '24시간 365일 언제든 이용 가능',
+                'feature-step-by-step': '단계적 학습 프로세스',
+                'feature-feedback': '이해도에 따른 적절한 피드백',
+                'feature-visualization': '학습 이력 시각화',
+                'feature-updates': '지속적인 지식 업데이트',
                 'start-button': '시작하기'
             }
         };
@@ -269,41 +287,6 @@
     </script>
 </body>
 </html>
-<!--
-Project Summary:
-- Name: WhyChain
-- Type: AI Learning Platform
-- Concept: "Teaching to Learn" approach with AI
-- Target: Global audience
-
-Key Features:
-- AI-powered learning through teaching
-- Multi-language support (9 languages)
-- Real-time feedback system
-- Progress visualization
-- 24/7 availability
-
-Technical Notes:
-- Responsive design
-- Material Design components
-- Animation effects
-- IP-based language detection
-- SEO optimized meta tags
-
-Supported Languages:
-- Japanese (ja)
-- English (en)
-- Korean (ko)
-- Chinese (zh)
-- Russian (ru)
-- Hindi (hi)
-- Arabic (ar)
-- Spanish (es)
-- French (fr)
-
-Last Updated: 2025-07-25
--->
-<html>
 <head>
     <meta charset="UTF-8">
     <title data-translate="page-title">WhyChain - 教えて学ぶAI学習プラットフォーム</title>
@@ -675,27 +658,27 @@ Last Updated: 2025-07-25
         </div>
 
         <section class="about-section">
-            <h2>WhyChainの特徴</h2>
+            <h2 data-translate="features-title">WhyChainの特徴</h2>
             <ul>
                 <li>
                     <span class="material-icons">schedule</span>
-                    <span>24時間365日いつでも利用可能</span>
+                    <span data-translate="feature-24-7">24時間365日いつでも利用可能</span>
                 </li>
                 <li>
                     <span class="material-icons">trending_up</span>
-                    <span>段階的な学習プロセス</span>
+                    <span data-translate="feature-step-by-step">段階的な学習プロセス</span>
                 </li>
                 <li>
                     <span class="material-icons">analytics</span>
-                    <span>理解度に応じた適切なフィードバック</span>
+                    <span data-translate="feature-feedback">理解度に応じた適切なフィードバック</span>
                 </li>
                 <li>
                     <span class="material-icons">insights</span>
-                    <span>学習履歴の可視化</span>
+                    <span data-translate="feature-visualization">学習履歴の可視化</span>
                 </li>
                 <li>
                     <span class="material-icons">update</span>
-                    <span>継続的な知識のアップデート</span>
+                    <span data-translate="feature-updates">継続的な知識のアップデート</span>
                 </li>
             </ul>
         </section>
@@ -855,63 +838,19 @@ Last Updated: 2025-07-25
         }
 
         function handleLanguageChange(lang) {
-            const translation = translations[lang];
-            if (!translation) return;
-
-            // ヒーローテキストの更新
-            const heroTexts = {
-                ja: document.querySelector('.hero-text-ja'),
-                en: document.querySelector('.hero-text-en'),
-                ko: document.querySelector('.hero-text-ko')
-            };
-
-            Object.entries(heroTexts).forEach(([key, element]) => {
-                if (element) {
-                    element.style.display = key === lang ? 'block' : 'none';
-                    if (key === lang && translation.hero) {
-                        element.textContent = translation.hero[key];
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (aboutTranslations[lang] && aboutTranslations[lang][key]) {
+                    if (element.tagName === 'META') {
+                        element.setAttribute('content', aboutTranslations[lang][key]);
+                    } else {
+                        element.textContent = aboutTranslations[lang][key];
                     }
                 }
             });
-
-            // ナビゲーションの更新
-            document.querySelectorAll('.nav-link').forEach(link => {
-                const key = link.getAttribute('data-key');
-                if (key && translation.nav && translation.nav[key]) {
-                    link.textContent = translation.nav[key];
-                }
-            });
-
-            // 機能セクションの更新
-            if (translation.features) {
-                ['teach', 'feedback', 'fields'].forEach(featureKey => {
-                    const featureSection = document.querySelector(`[data-feature="${featureKey}"]`);
-                    if (featureSection && translation.features[featureKey]) {
-                        const feature = translation.features[featureKey];
-                        const titleEl = featureSection.querySelector('h2');
-                        const descEl = featureSection.querySelector('p');
-                        
-                        if (titleEl && feature.title) titleEl.textContent = feature.title;
-                        if (descEl && feature.description) descEl.textContent = feature.description;
-                    }
-                });
-            }
-
-            // 概要セクションの更新
-            if (translation.about) {
-                const aboutSection = document.querySelector('.about-section');
-                if (aboutSection) {
-                    const titleEl = aboutSection.querySelector('h2');
-                    if (titleEl) titleEl.textContent = translation.about.title;
-
-                    const items = aboutSection.querySelectorAll('li span:not(.material-icons)');
-                    items.forEach((item, index) => {
-                        if (translation.about.items[index]) {
-                            item.textContent = translation.about.items[index];
-                        }
-                    });
-                }
-            }
+            
+            document.documentElement.lang = lang;
+            document.title = aboutTranslations[lang]['page-title'];
 
             // フォントと文字方向の更新
             setAppropriateFont(lang);

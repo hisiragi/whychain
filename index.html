@@ -114,27 +114,192 @@
                 flex-direction: column;
             }
         }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .language-selector select {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        /* ページ遷移アニメーション */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-color);
+            transform: translateX(-100%);
+            z-index: 2000;
+        }
+
+        @keyframes pageTransition {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(0); }
+        }
     </style>
 </head>
 <body>
-    <!-- ナビゲーション部分は既存のコードを使用 -->
     <nav class="nav">
-        <!-- ...existing navigation code... -->
+        <div class="nav-container">
+            <a href="/" class="nav-logo">WhyChain</a>
+            <div class="nav-menu">
+                <a href="/" class="nav-link" data-key="home">ホーム</a>
+                <a href="/about" class="nav-link" data-key="about">概要</a>
+                <a href="/contact" class="nav-link" data-key="contact">お問い合わせ</a>
+                <div class="language-selector">
+                    <select id="language-select" onchange="handleLanguageChange(this.value)">
+                        <option value="ja">日本語</option>
+                        <option value="en">English</option>
+                        <option value="ko">한국어</option>
+                    </select>
+                </div>
+            </div>
+        </div>
     </nav>
 
     <main class="hero">
-        <h1>WhyChain</h1>
-        <p>AIとの対話で学びを深める、新しい学習プラットフォーム。<br>
+        <h1 data-translate="title">WhyChain</h1>
+        <p data-translate="description">AIとの対話で学びを深める、新しい学習プラットフォーム。<br>
            教えることで学ぶ革新的なアプローチで、あなたの知識を確実なものに。</p>
         <div class="button-container">
-            <a href="/start" class="button primary-button">今すぐ始める</a>
-            <a href="/contact" class="button secondary-button">お問い合わせ</a>
+            <a href="/start" class="button primary-button" data-translate="start-button">今すぐ始める</a>
+            <a href="/contact" class="button secondary-button" data-translate="contact-button">お問い合わせ</a>
+        </div>
+    </main>
+        <div class="button-container">
+            <a href="/start" class="button primary-button" data-translate="start-button">今すぐ始める</a>
+            <a href="/contact" class="button secondary-button" data-translate="contact-button">お問い合わせ</a>
         </div>
     </main>
 
     <!-- 既存の言語切り替えとシェア機能のスクリプト -->
     <script>
-        // ...existing scripts...
+        const translations = {
+            ja: {
+                title: 'WhyChain',
+                description: 'AIとの対話で学びを深める、新しい学習プラットフォーム。\n教えることで学ぶ革新的なアプローチで、あなたの知識を確実なものに。',
+                'start-button': '今すぐ始める',
+                'contact-button': 'お問い合わせ',
+                nav: {
+                    home: 'ホーム',
+                    about: '概要',
+                    contact: 'お問い合わせ'
+                }
+            },
+            en: {
+                title: 'WhyChain',
+                description: 'A new learning platform that deepens knowledge through dialogue with AI.\nSecure your knowledge with an innovative approach to learning by teaching.',
+                'start-button': 'Get Started',
+                'contact-button': 'Contact Us',
+                nav: {
+                    home: 'Home',
+                    about: 'About',
+                    contact: 'Contact'
+                }
+            },
+            ko: {
+                title: 'WhyChain',
+                description: 'AI와의 대화로 학습을 깊이 있게 하는 새로운 학습 플랫폼.\n가르치면서 배우는 혁신적인 접근으로 당신의 지식을 확실하게.',
+                'start-button': '시작하기',
+                'contact-button': '문의하기',
+                nav: {
+                    home: '홈',
+                    about: '소개',
+                    contact: '문의'
+                }
+            }
+        };
+
+        function handleLanguageChange(lang) {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.innerHTML = translations[lang][key].replace('\n', '<br>');
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                const key = link.getAttribute('data-key');
+                if (translations[lang].nav && translations[lang].nav[key]) {
+                    link.textContent = translations[lang].nav[key];
+                }
+            });
+
+            document.documentElement.lang = lang;
+        }
+
+        // スムーズなページ遷移
+        document.querySelector('.primary-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            
+            const transition = document.createElement('div');
+            transition.className = 'page-transition';
+            document.body.appendChild(transition);
+
+            transition.style.animation = 'pageTransition 0.5s ease-in forwards';
+            
+            setTimeout(() => {
+                window.location.href = href;
+            }, 500);
+        });
+
+        // 初期言語の設定
+        document.addEventListener('DOMContentLoaded', () => {
+            const userLang = navigator.language.split('-')[0];
+            if (translations[userLang]) {
+                document.getElementById('language-select').value = userLang;
+                handleLanguageChange(userLang);
+            }
+        });
     </script>
 </body>
 </html>

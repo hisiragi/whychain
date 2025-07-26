@@ -62,21 +62,30 @@
         }
 
         .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            background-size: 200% 200%;
+            padding: 8rem 2rem;
             text-align: center;
+            color: white;
             margin-bottom: 4rem;
+            animation: gradientFlow 15s ease infinite;
+            position: relative;
+            overflow: hidden;
         }
 
         .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
         .hero p {
-            font-size: 1.2rem;
-            color: #666;
-            max-width: 600px;
+            font-size: 1.5rem;
+            max-width: 800px;
             margin: 0 auto;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         .features {
@@ -145,44 +154,49 @@
     </style>
 </head>
 <body>
-    <nav class="nav">
+        <nav class="nav">
         <div class="nav-container">
             <a href="/" class="nav-logo">WhyChain</a>
-            <div class="language-selector">
-                <select id="language-select" onchange="handleLanguageChange(this.value)">
-                    <option value="ja">日本語</option>
-                    <option value="en">English</option>
-                    <option value="ko">한국어</option>
-                </select>
+            <button class="nav-toggle material-icons">menu</button>
+            <div class="nav-menu">
+                <a href="/" class="nav-link" data-key="home">ホーム</a>
+                <a href="/about" class="nav-link" data-key="about">概要</a>
+                <a href="/contact" class="nav-link" data-key="contact">お問い合わせ</a>
+                <a href="/start" class="nav-link" data-key="start">始める</a>
+                <div class="language-selector">
+                    <select id="language-select">
+                        <option value="ja">日本語</option>
+                        <option value="en">English</option>
+                        <option value="ko">한국어</option>
+                    </select>
+                </div>
             </div>
         </div>
     </nav>
 
     <div class="container">
         <div class="hero">
-            <h1 data-translate="about-title">WhyChainについて</h1>
-            <p data-translate="about-description">AIとの対話を通じて、教えることで学ぶ新しい学習プラットフォーム。あなたの知識を確実なものにします。</p>
+            <h1 class="animate-fadeInUp" data-translate="about-title">WhyChainについて</h1>
+            <p class="animate-fadeInUp" style="color: white;" data-translate="about-description">AIとの対話を通じて、教えることで学ぶ新しい学習プラットフォーム。あなたの知識を確実なものにします。</p>
         </div>
 
-        <div class="features">
-            <div class="feature-card">
+        <div class="features animate-fadeInUp">
+            <div class="feature-card animate-scaleIn">
                 <div class="feature-icon material-icons">school</div>
                 <h3 class="feature-title" data-translate="feature1-title">教えて学ぶ</h3>
                 <p class="feature-description" data-translate="feature1-desc">他者に教えることで知識が定着する学習方法を、AIとの対話で実現します。</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card animate-scaleIn">
                 <div class="feature-icon material-icons">psychology</div>
                 <h3 class="feature-title" data-translate="feature2-title">即時フィードバック</h3>
                 <p class="feature-description" data-translate="feature2-desc">説明の中の誤りや不正確な部分を即座に指摘。より正確な理解へと導きます。</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card animate-scaleIn">
                 <div class="feature-icon material-icons">library_books</div>
                 <h3 class="feature-title" data-translate="feature3-title">幅広い学習分野</h3>
                 <p class="feature-description" data-translate="feature3-desc">プログラミング、一般教養、専門知識など、さまざまな分野での学習をサポート。</p>
             </div>
-        </div>
-
-        <div class="cta">
+        </div>        <div class="cta">
             <a href="/start" class="cta-button" data-translate="start-button">今すぐ始める</a>
         </div>
     </div>
@@ -697,51 +711,6 @@ Last Updated: 2025-07-25
     </div>
 
     <style>
-        .ai-features-section {
-            margin-top: 3rem;
-            padding: 2rem;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            border-radius: 8px;
-            color: white;
-        }
-
-        .ai-features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .ai-feature-card {
-            text-align: left;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            backdrop-filter: blur(5px);
-            transition: transform 0.3s ease;
-        }
-
-        .ai-feature-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .ai-feature-card .material-icons {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .ai-feature-card h3 {
-            font-size: 1.5rem;
-            margin: 1rem 0;
-        }
-
-        .language-support {
-            margin-top: 3rem;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            text-align: center;
-        }
 
         .floating-buttons {
             position: fixed;

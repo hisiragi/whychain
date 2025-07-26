@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>WhyChain - 教えて学ぶAI学習プラットフォーム</title>
+    <meta name="description" content="WhyChainは、AIとの対話を通じて知識を深める新しい学習プラットフォーム。プログラミング、教養、学習知識をAIに教えることで効果的に身につけることができます。">
+    <meta property="og:title" content="WhyChain - 教えて学ぶAI学習プラットフォーム">
+    <meta property="og:description" content="AIとの対話を通じて知識を深める新しい学習プラットフォーム">
+    <meta property="og:image" content="/images/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- フォントとアイコンの読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" href="/images/logo.png">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f50057;
+            --accent-color: #00c853;
+            --background-light: #f5f5f5;
+            --text-color: #333;
+            --animation-duration: 0.8s;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
+            color: var(--text-color);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(74,144,226,0.1) 0%, rgba(0,200,83,0.1) 100%);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 2rem;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .button {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .primary-button {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 6px rgba(74,144,226,0.2);
+        }
+
+        .secondary-button {
+            background: white;
+            color: var(--primary-color);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .button-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ナビゲーション部分は既存のコードを使用 -->
+    <nav class="nav">
+        <!-- ...existing navigation code... -->
+    </nav>
+
+    <main class="hero">
+        <h1>WhyChain</h1>
+        <p>AIとの対話で学びを深める、新しい学習プラットフォーム。<br>
+           教えることで学ぶ革新的なアプローチで、あなたの知識を確実なものに。</p>
+        <div class="button-container">
+            <a href="/start" class="button primary-button">今すぐ始める</a>
+            <a href="/contact" class="button secondary-button">お問い合わせ</a>
+        </div>
+    </main>
+
+    <!-- 既存の言語切り替えとシェア機能のスクリプト -->
+    <script>
+        // ...existing scripts...
+    </script>
+</body>
+</html>

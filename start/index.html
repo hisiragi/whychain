@@ -234,7 +234,7 @@
             </div>
         </div>
 
-        <div class="chat-container" style="opacity: 0;">
+        <div class="chat-container" style="display: none;">
             <div class="chat-messages" id="chat-messages"></div>
             <div class="input-container">
                 <textarea class="input-field" id="user-input" rows="3" placeholder="教えたいことを入力してください" data-translate="input-placeholder"></textarea>
@@ -309,7 +309,7 @@
         const topicSelection = document.querySelector('.topic-selection');
 
         // Repository SecretsからAPIキーを取得（本番環境用）
-        const OPENAI_API_KEY = 'APIKEY'; // Repository Secretsから取得したAPIキーに置き換えられます
+        const OPENAI_API_KEY = 'APIKYE'; // Repository Secretsの正確な名前を使用
 
         // OpenAI APIの設定
         async function sendMessage(message) {
@@ -501,10 +501,12 @@
             if (chatMessages.length === 0) {
                 initialPrompt.classList.add('fade-out');
                 topicSelection.classList.add('fade-out');
+                const chatContainer = document.querySelector('.chat-container');
+                chatContainer.style.display = 'block';
                 setTimeout(() => {
                     initialPrompt.classList.add('hidden');
                     topicSelection.classList.add('hidden');
-                    document.querySelector('.chat-container').classList.add('fade-in');
+                    chatContainer.classList.add('fade-in');
                 }, 500);
             }
 
@@ -540,8 +542,21 @@
                 const topic = card.dataset.topic;
                 const currentLang = document.documentElement.lang;
                 const topicName = translations[currentLang][`topic-${topic}`];
-                userInput.value = `${topicName}について教えたいと思います。`;
+                let message;
+                switch(currentLang) {
+                    case 'en':
+                        message = `I want to teach about ${topicName}`;
+                        break;
+                    case 'ko':
+                        message = `${topicName}에 대해 가르치고 싶습니다`;
+                        break;
+                    default:
+                        message = `${topicName}について教えたいと思います`;
+                }
+                userInput.value = message;
                 userInput.focus();
+                // トピック選択時に自動的にチャットを開始
+                handleSend();
             });
         });
 

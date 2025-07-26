@@ -1,4 +1,260 @@
 <!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title data-translate="page-title">WhyChain - 概要</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" href="/images/logo.png">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f50057;
+            --accent-color: #00c853;
+            --background-light: #f5f5f5;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .feature-description {
+            color: #666;
+        }
+
+        .cta {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .language-selector {
+            margin-left: 1rem;
+        }
+
+        .language-selector select {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            font-family: inherit;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">WhyChain</a>
+            <div class="language-selector">
+                <select id="language-select" onchange="handleLanguageChange(this.value)">
+                    <option value="ja">日本語</option>
+                    <option value="en">English</option>
+                    <option value="ko">한국어</option>
+                </select>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="hero">
+            <h1 data-translate="about-title">WhyChainについて</h1>
+            <p data-translate="about-description">AIとの対話を通じて、教えることで学ぶ新しい学習プラットフォーム。あなたの知識を確実なものにします。</p>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon material-icons">school</div>
+                <h3 class="feature-title" data-translate="feature1-title">教えて学ぶ</h3>
+                <p class="feature-description" data-translate="feature1-desc">他者に教えることで知識が定着する学習方法を、AIとの対話で実現します。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon material-icons">psychology</div>
+                <h3 class="feature-title" data-translate="feature2-title">即時フィードバック</h3>
+                <p class="feature-description" data-translate="feature2-desc">説明の中の誤りや不正確な部分を即座に指摘。より正確な理解へと導きます。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon material-icons">library_books</div>
+                <h3 class="feature-title" data-translate="feature3-title">幅広い学習分野</h3>
+                <p class="feature-description" data-translate="feature3-desc">プログラミング、一般教養、専門知識など、さまざまな分野での学習をサポート。</p>
+            </div>
+        </div>
+
+        <div class="cta">
+            <a href="/start" class="cta-button" data-translate="start-button">今すぐ始める</a>
+        </div>
+    </div>
+
+    <script>
+        const aboutTranslations = {
+            ja: {
+                'page-title': 'WhyChain - 概要',
+                'about-title': 'WhyChainについて',
+                'about-description': 'AIとの対話を通じて、教えることで学ぶ新しい学習プラットフォーム。あなたの知識を確実なものにします。',
+                'feature1-title': '教えて学ぶ',
+                'feature1-desc': '他者に教えることで知識が定着する学習方法を、AIとの対話で実現します。',
+                'feature2-title': '即時フィードバック',
+                'feature2-desc': '説明の中の誤りや不正確な部分を即座に指摘。より正確な理解へと導きます。',
+                'feature3-title': '幅広い学習分野',
+                'feature3-desc': 'プログラミング、一般教養、専門知識など、さまざまな分野での学習をサポート。',
+                'start-button': '今すぐ始める'
+            },
+            en: {
+                'page-title': 'WhyChain - About',
+                'about-title': 'About WhyChain',
+                'about-description': 'A new learning platform that helps you learn by teaching through AI dialogue. Solidify your knowledge effectively.',
+                'feature1-title': 'Learn by Teaching',
+                'feature1-desc': 'Experience the proven method of learning through teaching, now with AI dialogue.',
+                'feature2-title': 'Instant Feedback',
+                'feature2-desc': 'Get immediate feedback on errors and inaccuracies in your explanations, guiding you to better understanding.',
+                'feature3-title': 'Wide Range of Topics',
+                'feature3-desc': 'Support for various fields including programming, general education, and specialized knowledge.',
+                'start-button': 'Get Started'
+            },
+            ko: {
+                'page-title': 'WhyChain - 소개',
+                'about-title': 'WhyChain 소개',
+                'about-description': 'AI와의 대화를 통해 가르치면서 배우는 새로운 학습 플랫폼. 당신의 지식을 확실하게 만듭니다.',
+                'feature1-title': '가르치며 배우기',
+                'feature1-desc': 'AI와의 대화를 통해 다른 사람에게 가르치면서 배우는 학습 방법을 실현합니다.',
+                'feature2-title': '즉각적인 피드백',
+                'feature2-desc': '설명 중의 오류와 부정확한 부분을 즉시 지적하여 더 정확한 이해로 이끕니다.',
+                'feature3-title': '폭넓은 학습 분야',
+                'feature3-desc': '프로그래밍, 교양, 전문 지식 등 다양한 분야의 학습을 지원합니다.',
+                'start-button': '시작하기'
+            }
+        };
+
+        function handleLanguageChange(lang) {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (aboutTranslations[lang] && aboutTranslations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translations[lang][key];
+                    } else if (element.tagName === 'META') {
+                        element.setAttribute('content', translations[lang][key]);
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            document.documentElement.lang = lang;
+            document.title = aboutTranslations[lang]['page-title'];
+        }
+
+        // 初期言語の設定
+        document.addEventListener('DOMContentLoaded', () => {
+            const userLang = navigator.language.split('-')[0];
+            if (aboutTranslations[userLang]) {
+                document.getElementById('language-select').value = userLang;
+                handleLanguageChange(userLang);
+            }
+        });
+    </script>
+</body>
+</html>
 <!--
 Project Summary:
 - Name: WhyChain

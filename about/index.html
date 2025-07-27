@@ -260,21 +260,37 @@
         };
 
         function handleLanguageChange(lang) {
+            // データ属性を持つ要素の翻訳
             document.querySelectorAll('[data-translate]').forEach(element => {
                 const key = element.getAttribute('data-translate');
                 if (aboutTranslations[lang] && aboutTranslations[lang][key]) {
-                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                        element.placeholder = translations[lang][key];
-                    } else if (element.tagName === 'META') {
-                        element.setAttribute('content', translations[lang][key]);
+                    if (element.tagName === 'META') {
+                        element.setAttribute('content', aboutTranslations[lang][key]);
                     } else {
-                        element.textContent = translations[lang][key];
+                        element.textContent = aboutTranslations[lang][key];
                     }
                 }
             });
+
+            // ナビゲーションリンクの翻訳
+            document.querySelectorAll('.nav-link').forEach(link => {
+                const key = link.getAttribute('data-key');
+                if (navTranslations[lang]?.nav?.[key]) {
+                    link.textContent = navTranslations[lang].nav[key];
+                }
+            });
+
             document.documentElement.lang = lang;
             document.title = aboutTranslations[lang]['page-title'];
-        }
+
+            // フォントと文字方向の更新
+            setAppropriateFont(lang);
+
+        // 初期言語の設定
+        document.getElementById('language-select').addEventListener('change', function(e) {
+            const lang = e.target.value;
+            handleLanguageChange(lang);
+        });
 
         // 初期言語の設定
         document.addEventListener('DOMContentLoaded', () => {
@@ -282,14 +298,13 @@
             if (aboutTranslations[userLang]) {
                 document.getElementById('language-select').value = userLang;
                 handleLanguageChange(userLang);
+            } else {
+                handleLanguageChange('ja');
             }
         });
     </script>
 </body>
 </html>
-<head>
-    <meta charset="UTF-8">
-    <title data-translate="page-title">WhyChain - 教えて学ぶAI学習プラットフォーム</title>
     <meta name="description" data-translate="meta-description" content="WhyChainは、AIとの対話を通じて知識を深める新しい学習プラットフォーム。プログラミング、教養、学習知識をAIに教えることで効果的に身につけることができます。">
     <meta property="og:title" data-translate="og-title" content="WhyChain - 教えて学ぶAI学習プラットフォーム">
     <meta property="og:description" data-translate="og-description" content="AIとの対話を通じて知識を深める新しい学習プラットフォーム">
@@ -638,22 +653,22 @@
 
     <div class="container">
         <div class="features animate-fadeInUp" style="animation-delay: 0.7s;">
-            <div class="feature-card animate-scaleIn" style="animation-delay: 0.9s;" data-feature="teach">
+                            <div class="feature-card animate-scaleIn" style="animation-delay: 0.9s;" data-feature="teach">
                 <span class="material-icons feature-icon">school</span>
-                <h2>教えることで学ぶ</h2>
-                <p>他者に教えることで知識が定着するという学習方法を、AIとの対話で実現します。時間や場所を問わず、いつでも学習できます。</p>
+                <h2 data-translate="feature1-title">教えることで学ぶ</h2>
+                <p data-translate="feature1-desc">他者に教えることで知識が定着する学習方法を、AIとの対話で実現します。時間や場所を問わず、いつでも学習できます。</p>
             </div>
             
             <div class="feature-card animate-scaleIn" style="animation-delay: 1.1s;" data-feature="feedback">
                 <span class="material-icons feature-icon">psychology</span>
-                <h2>AIによるフィードバック</h2>
-                <p>説明の中の誤りや不正確な部分を即座に指摘。より正確な理解へと導きます。</p>
+                <h2 data-translate="feature2-title">AIによるフィードバック</h2>
+                <p data-translate="feature2-desc">説明の中の誤りや不正確な部分を即座に指摘。より正確な理解へと導きます。</p>
             </div>
             
             <div class="feature-card animate-scaleIn" style="animation-delay: 1.3s;" data-feature="fields">
                 <span class="material-icons feature-icon">auto_stories</span>
-                <h2>幅広い学習分野</h2>
-                <p>プログラミング、一般教養、専門知識など、さまざまな分野での学習をサポートします。</p>
+                <h2 data-translate="feature3-title">幅広い学習分野</h2>
+                <p data-translate="feature3-desc">プログラミング、一般教養、専門知識など、さまざまな分野での学習をサポートします。</p>
             </div>
         </div>
 
@@ -856,8 +871,8 @@
             setAppropriateFont(lang);
         }
 
-        // 多言語テキストデータ
-        const translations = {
+        // ナビゲーション用の翻訳データ
+        const navTranslations = {
             ja: {
                 nav: {
                     home: 'ホーム',

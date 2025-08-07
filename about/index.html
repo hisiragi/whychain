@@ -287,12 +287,6 @@
             setAppropriateFont(lang);
 
         // 初期言語の設定
-        document.getElementById('language-select').addEventListener('change', function(e) {
-            const lang = e.target.value;
-            handleLanguageChange(lang);
-        });
-
-        // 初期言語の設定
         document.addEventListener('DOMContentLoaded', () => {
             const userLang = navigator.language.split('-')[0];
             if (aboutTranslations[userLang]) {
@@ -305,11 +299,6 @@
     </script>
 </body>
 </html>
-    <meta name="description" data-translate="meta-description" content="WhyChainは、AIとの対話を通じて知識を深める新しい学習プラットフォーム。プログラミング、教養、学習知識をAIに教えることで効果的に身につけることができます。">
-    <meta property="og:title" data-translate="og-title" content="WhyChain - 教えて学ぶAI学習プラットフォーム">
-    <meta property="og:description" data-translate="og-description" content="AIとの対話を通じて知識を深める新しい学習プラットフォーム">
-    <meta property="og:image" content="/images/logo.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -853,6 +842,7 @@
         }
 
         function handleLanguageChange(lang) {
+            // データ属性を持つ要素の翻訳
             document.querySelectorAll('[data-translate]').forEach(element => {
                 const key = element.getAttribute('data-translate');
                 if (aboutTranslations[lang] && aboutTranslations[lang][key]) {
@@ -863,7 +853,22 @@
                     }
                 }
             });
-            
+
+            // ナビゲーションリンクの翻訳
+            document.querySelectorAll('.nav-link').forEach(link => {
+                const key = link.getAttribute('data-key');
+                if (navTranslations[lang]?.nav?.[key]) {
+                    link.textContent = navTranslations[lang].nav[key];
+                }
+            });
+
+            // ヒーローセクションの表示/非表示切り替え
+            document.querySelectorAll('.hero p[class^="hero-text-"]').forEach(element => {
+                const langCode = element.className.split('-').pop();
+                element.style.display = langCode === lang ? 'block' : 'none';
+            });
+
+            // 言語とタイトルの設定
             document.documentElement.lang = lang;
             document.title = aboutTranslations[lang]['page-title'];
 
@@ -1071,11 +1076,27 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // 言語切り替え機能の初期化
-            initializeLanguageHandling();
+            // 言語セレクターのイベントリスナーを設定
+            const languageSelect = document.getElementById('language-select');
+            if (languageSelect) {
+                languageSelect.addEventListener('change', function(e) {
+                    handleLanguageChange(e.target.value);
+                });
+            }
+
+            // モバイルメニューの初期化
+            const menuToggle = document.querySelector('.nav-toggle');
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    const menu = document.querySelector('.nav-menu');
+                    menu?.classList.toggle('active');
+                });
+            }
+
             // シェア機能の初期化
             initializeShareFeatures();
-            // 自動言語検出の実行
+            
+            // 自動言語検出と初期言語の設定
             detectUserLanguage();
         });
 
